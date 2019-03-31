@@ -4,20 +4,22 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-
 import javax.net.ssl.SSLSocket;
 import javax.net.ssl.SSLSocketFactory;
 
 public class ClienteSSL {
-    public static void main (String[] args) throws ClassNotFoundException{
-        System.setProperty("java.net.ssl.trustore", "./resources/Servidor.jks" );
+    public static void main (String[] args) {
+        //String sDirectorioTrabajo = System.getProperty("user.dir");
+        //System.out.println("El directorio de trabajo es " + sDirectorioTrabajo);
+        
+        System.setProperty("javax.net.ssl.trustStore", "./KeyStore/Clientes.jks" );
         ObjectOutputStream salida = null;
         ObjectInputStream entrada = null;
         SSLSocket sslsocket = null;
         
         try{
             SSLSocketFactory fact = (SSLSocketFactory) SSLSocketFactory.getDefault();
-            sslsocket = (SSLSocket) fact.createSocket("localhost", 8000);
+            sslsocket = (SSLSocket) fact.createSocket("localhost", 8000);   //("localhost",SERVER_PORT)
             //hacer handshake
             sslsocket.startHandshake();
             System.out.println("Se ha autenticado correctamente");
@@ -43,14 +45,15 @@ public class ClienteSSL {
 		} finally {
 
 			try {
-				entrada.close();
-				sslsocket.close();
+                            entrada.close();
+                            sslsocket.close();
 			} catch (IOException ex) {
 
 			}
-		}           
-
 		}
-        
+            
+
+		}    
         
     }
+    

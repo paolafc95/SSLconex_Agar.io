@@ -2,6 +2,8 @@ package conexionssl;
 import java.io.*;
 import java.security.*;
 import java.security.cert.CertificateException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.net.ssl.*;
 
 public class ServerSSL {
@@ -10,7 +12,7 @@ public class ServerSSL {
         String passwClient = "cliente";
         String passwKs = "keystore";
         
-        String nameKs = "./resources/Servidor.jks";         //se establece el nombre de la KeyStore -sujeta a cambios-
+        String nameKs = "user.dir/KeyStore/Clientes.jks";         //se establece el nombre de la KeyStore -sujeta a cambios-
         char[] passwordCl = passwClient.toCharArray();
         char[] passwordKs = passwKs.toCharArray();
         
@@ -24,7 +26,7 @@ public class ServerSSL {
             SSLContext scon = SSLContext.getInstance("TLS");
             scon.init(kmf.getKeyManagers(), null, null );
             SSLServerSocketFactory  ssf = scon.getServerSocketFactory();
-            SSLServerSocket s = (SSLServerSocket)ssf.createServerSocket(8000);
+            SSLServerSocket s = (SSLServerSocket)ssf.createServerSocket(8000);      //(SERVER_PORT)
             
             while (true){
                  SSLSocket sslsocket =(SSLSocket) s.accept();
@@ -33,7 +35,8 @@ public class ServerSSL {
                  Tester t = new Tester (sslsocket);
                  t.start();                 
             }
- } catch (KeyStoreException | IOException | NoSuchAlgorithmException | CertificateException | UnrecoverableKeyException | KeyManagementException ex) {     
+ } catch (KeyStoreException | IOException | NoSuchAlgorithmException | CertificateException | UnrecoverableKeyException | KeyManagementException ex) {
+     //Logger.getLogger(TotalControlServer.class.getName()).log(Level.SEVERE, null, ex);
     }     
     }    
 }
