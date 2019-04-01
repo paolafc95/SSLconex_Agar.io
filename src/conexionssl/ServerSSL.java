@@ -12,7 +12,7 @@ public class ServerSSL {
         String passwClient = "cliente";
         String passwKs = "keystore";
         
-        String nameKs = "user.dir/KeyStore/Clientes.jks";         //se establece el nombre de la KeyStore -sujeta a cambios-
+        String nameKs = "pfc.store";         //se establece el nombre de la KeyStore -sujeta a cambios-
         char[] passwordCl = passwClient.toCharArray();
         char[] passwordKs = passwKs.toCharArray();
         

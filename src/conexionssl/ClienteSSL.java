@@ -12,7 +12,7 @@ public class ClienteSSL {
         //String sDirectorioTrabajo = System.getProperty("user.dir");
         //System.out.println("El directorio de trabajo es " + sDirectorioTrabajo);
         
-        System.setProperty("javax.net.ssl.trustStore", "./KeyStore/Clientes.jks" );
+        System.setProperty("javax.net.ssl.trustStore", "pfc.store" );     //pfc.store cambiar por esto
         ObjectOutputStream salida = null;
         ObjectInputStream entrada = null;
         SSLSocket sslsocket = null;
