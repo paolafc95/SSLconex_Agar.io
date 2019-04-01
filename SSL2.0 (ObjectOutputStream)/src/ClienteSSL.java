@@ -1,4 +1,4 @@
-package conexionssl;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -27,33 +27,26 @@ public class ClienteSSL {
             salida = new ObjectOutputStream(sslsocket.getOutputStream());
             entrada = new ObjectInputStream(sslsocket.getInputStream());
             
-            BufferedReader buffer = new BufferedReader(new InputStreamReader(System.in));
+           // BufferedReader buffer = new BufferedReader(new InputStreamReader(System.in));
             boolean exit = false;
-            while (!exit){
+            //while (!exit){
                 System.out.println("> ");
-                String line = buffer.readLine();
+                String line = "changos";
                 salida.writeObject(line);
-                salida.flush();
+              //  salida.flush();
                 
                 String st = (String) entrada.readObject();
                 System.out.println(st);
-            }         
-        
-        }catch (IOException ex) {
-            } catch (ClassNotFoundException ex) {
+            //}         
+                entrada.close();
+                sslsocket.close();
+        }catch (Exception e) {
+        	System.out.println(e.getMessage());
+            } 
+		
 
-		} finally {
-
-			try {
-                            entrada.close();
-                            sslsocket.close();
-			} catch (IOException ex) {
-
-			}
-		}
             
 
 		}    
         
     }
-    

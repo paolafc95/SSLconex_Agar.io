@@ -1,4 +1,3 @@
-package conexionssl;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -21,24 +20,19 @@ public class Tester extends Thread {
              entrada = new ObjectInputStream(sslsocket.getInputStream());
              salida = new ObjectOutputStream (sslsocket.getOutputStream());
               
-             while (true){
+            // while (true){
                  String x = (String) entrada.readObject();
                  System.out.println("Se tiene: "+ x);
-                 salida.writeObject(x.concat(x));
-                 salida.flush();
-              }
+                 salida.writeObject(x+x);
+                // salida.flush();
+              //}
+                 entrada.close();
+                 salida.close();
+                 this.sslsocket.close();
          } catch (IOException ex) {
        //Logger.getLogger(CmdLineService.class.getName()).log(Level.SEVERE, null, ex);
     } catch (ClassNotFoundException ex) {
        //Logger.getLogger(CmdLineService.class.getName()).log(Level.SEVERE, null, ex); 
-    } finally {
-        try {
-            entrada.close();
-            salida.close();
-            this.sslsocket.close();
-        } catch (IOException ex) {
-            //Logger.getLogger(CmdLineService.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }  
+    } 
 }
 }
